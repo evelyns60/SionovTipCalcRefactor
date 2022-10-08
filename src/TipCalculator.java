@@ -1,7 +1,11 @@
+import java.text.DecimalFormat;
+
 public class TipCalculator {
 
-    private int numPeople;
-    private int tipPercentage;
+    DecimalFormat formatter = new DecimalFormat("#.##");
+
+    private final int numPeople;
+    private final int tipPercentage;
     private double totalBillBeforeTip;
     private double tip;
     private double totalBill;
@@ -12,7 +16,7 @@ public class TipCalculator {
         totalBillBeforeTip = 0.0;
     }
 
-    public double getTotalBillBeforeTip() { return totalBillBeforeTip; }
+    public String getTotalBillBeforeTip() { return formatter.format(totalBillBeforeTip); }
 
     public int getTipPercentage() { return tipPercentage; }
 
@@ -20,28 +24,28 @@ public class TipCalculator {
         totalBillBeforeTip += cost;
     }
 
-    public double tipAmount() {
-        tip = totalBillBeforeTip * (tipPercentage / 100);
-        return tip;
+    public String tipAmount() {
+        tip = totalBillBeforeTip * ((double)tipPercentage / 100);
+        return formatter.format(tip);
     }
 
-    public double totalBill(){
+    public String totalBill(){
          totalBill = totalBillBeforeTip + tip ;
-        return totalBill;
+        return formatter.format(totalBill);
     }
 
-    public double perPersonCostBeforeTip() {
+    public String perPersonCostBeforeTip() {
         double costPerPersonBeforeTip = totalBillBeforeTip / numPeople;
-        return costPerPersonBeforeTip;
+        return formatter.format(costPerPersonBeforeTip);
     }
 
-    public double perPersonTipAmount() {
+    public String perPersonTipAmount() {
         double costOfTipPerPerson = tip / numPeople;
-        return costOfTipPerPerson;
+        return formatter.format(costOfTipPerPerson);
     }
 
-    public double perPersonTotalCost() {
-        double costofTotalPerPerson = totalBill / numPeople;
-        return costofTotalPerPerson;
+    public String perPersonTotalCost() {
+        double costOfTotalPerPerson = totalBill / numPeople;
+        return formatter.format(costOfTotalPerPerson);
     }
 }
